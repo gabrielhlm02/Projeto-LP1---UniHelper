@@ -310,9 +310,9 @@ void wProf(Membro * pss, FILE * f) {		// escreve dados referentes a professor no
 void Armazena(Membro * pss) {			// escreve os dados no arquivo
 	FILE * f = fopen("dados.2.bin", "a");
 
-	fwrite(&pss->uid, sizeof(int), 1, f);
-	fwrite(&pss->valid, sizeof(int), 1, f);
-	fwrite(&pss->size, sizeof(int), 1, f);
+	fwrite(&pss->uid, sizeof(short int), 1, f);
+	fwrite(&pss->valid, sizeof(char), 1, f);
+	fwrite(&pss->size, sizeof(short int), 1, f);
 
 	fwrite((char *) &pss->tipo, sizeof(char), 1, f);
 	fwrite(&pss->tamn, sizeof(char), 1, f);
@@ -332,12 +332,12 @@ Membro Le() {			// Lê e retorna um membro do arquivo   //!! inacabada !!
 	Membro pss;
 	FILE * f = fopen("dados.2.bin", "r");
 	while (1) {
-		fread(&pss.uid, sizeof(int), 1, f);
-		fread(&pss.valid, sizeof(int), 1, f);
+		fread(&pss.uid, sizeof(short int), 1, f);
+		fread(&pss.valid, sizeof(char), 1, f);
 		if (pss.valid < 1) {
 			break;
 		}
-		fread(&pss.size, sizeof(int), 1, f);
+		fread(&pss.size, sizeof(short int), 1, f);
 
 		fread(&pss.tipo, sizeof(char), 1, f);
 		fread(&pss.tamn, sizeof(char), 1, f);
