@@ -1,14 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 typedef struct Memb {
 	short int uid;					// ID único
-	char valid;						// Indicador de remoção
-	short int size;					// Tamanho (em bytes) ocupado no arquivo
+	char valido;					// Indicador de remoção
 
 	enum {Alun, Prof} tipo;			// ~tipo~ do dado 
 	
-	char tamn;						// Quantidade de caracteres válidos no nome ( bytes ocupados pelo nome no arquivo)
 	char nome[64];					// Nome da pessoa
 
 	union {
@@ -31,6 +28,11 @@ typedef struct Memb {
 	};
 } Membro;
 
+int writerb(const void *ptr, size_t size, size_t nmemb, FILE *stream) {				// variação de byt += writerb para retornar quantidade de bytes escritos
+	printf("%lu\n", size);
+	fwrite(ptr, size, nmemb, stream);
+	return (int) size*nmemb;
+}
 
 void *memst(void *s, char c, size_t n) {
 	for (int i = 0; i < n; i++) {
@@ -42,7 +44,7 @@ void *memst(void *s, char c, size_t n) {
 int strin(char * in, int size, FILE * f) {		// Recebe strings usando fgets e remove caracteres indesejados
 	fgets(in, size, f);
 	int tamn = 0;
-	while (in[tamn] != '\0') {
+	while (tamn < size && in[tamn] != '\0') {
 		if (in[tamn] == '\n' || in[tamn] == '\r') {
 			in[tamn] = '\0';
 			break;
@@ -52,29 +54,22 @@ int strin(char * in, int size, FILE * f) {		// Recebe strings usando fgets e rem
 	return tamn;
 }
 
-
-
 int Preenche(Membro * pss, short int uid) {		
 	// Pede informações do usuário para criar um novo membro
 	// id unico deve ser gerenciado externamente
 	// retorna 0 se nome nao for fornecido, 1 caso contrario
-
 	pss->uid = uid;
-	pss->valid = 1;
-	pss->size = sizeof(pss->uid) + sizeof(pss->size) + sizeof(pss->valid);
+	pss->valido = 1;
 
 
 	char input[16] = {0};			// Variavél usada para receber e avaliar entrada do usuario
 	unsigned char chce = 0;			// Variavel usada para saber se o usuario quer adicionar mais disciplinas / turmas
-	int disci;						// Variavel para armazenar o codigo da disciplina / numero da sala a ser adicionado à grade
+	int elemento;					// Variavel para armazenar o codigo da disciplina / numero da sala a ser adicionado à grade
 	int dia = 0, hora = 0;			// dia escolhido pelo usuario [1 <-> 5]; horario escolhido pelo usuario [1 <-> 18]
 
 
 	printf("Nome: ");
-	pss->tamn = strin(pss->nome, 64, stdin);
-	pss->size += sizeof(char)*(pss->tamn) + sizeof(pss->tamn);
-
-	if(pss->tamn < 1) {
+	if(strin(pss->nome, 64, stdin) < 1) {
 		return 0;
 	}
 
@@ -83,35 +78,29 @@ int Preenche(Membro * pss, short int uid) {
 	sscanf(input, "%d", (int *) &pss->tipo);
 	pss->tipo %= 2;
 
-	pss->size += sizeof(char);		// ~= tipo
-
 	if (pss->tipo == Alun) {
 		pss->discs = 0;
-		pss->size += sizeof(pss->discs);
 		
 		memst(pss->grade, 0, sizeof(int)*5*18);		// Limpa a grade ( 0 => vazio)
 
 		printf("Matrícula: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%ld", &pss->matr);
-		pss->size += sizeof(pss->matr);
 
 		printf("Período: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%hhd", &pss->peri);
-		pss->size += sizeof(pss->peri);
 
 		printf("Deseja adicionar uma disciplina à grade? [ S ] / [ N ]: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%c", &chce);
-		chce %= 2;
-		
+		chce %= 2;				// Na tabela ascii, S/s são valores impares e N/n são pares
 
 
 		while (chce) {
 			printf("Insira o código da disciplina: ");
 			fgets(input, 16, stdin);
-			sscanf(input, "%d", &disci);
+			sscanf(input, "%d", &elemento);
 
 			while (1) {
 				do {
@@ -120,7 +109,7 @@ int Preenche(Membro * pss, short int uid) {
 				} while(sscanf(input, "%d", &dia) < 1);
 
 
-				if (dia <= 0 || dia > 5) {			// caso o dia escolhido for invalido, a inserção é cancelada
+				if (dia < 1 || dia > 5) {			// caso o dia escolhido for invalido, a inserção é cancelada
 					break;
 				}
 
@@ -131,7 +120,7 @@ int Preenche(Membro * pss, short int uid) {
 					} while(sscanf(input, "%d", &hora) < 1);
 
 
-					if (hora <= 0 || hora > 18) {	// caso o horario escolhido for invalido, a inserção é cancelada
+					if (hora < 1 || hora > 18) {	// caso o horario escolhido for invalido, a inserção é cancelada
 						break;
 					}
 
@@ -140,11 +129,11 @@ int Preenche(Membro * pss, short int uid) {
 						pss->discs--;							// operação será revertida, exceto quando o valor novo for 0 (*)
 					}
 
-					pss->grade[dia-1][hora-1] = disci;
+					pss->grade[dia-1][hora-1] = elemento;
 
 					
 
-					if (disci != 0) {							// (*)
+					if (elemento != 0) {							// (*)
 						pss->discs++;
 					}
 
@@ -160,33 +149,29 @@ int Preenche(Membro * pss, short int uid) {
 			chce %= 2;		// Na tabela ascii, S/s são valores impares e N/n são pares
 		}
 
-		pss->size += sizeof(int)*2*pss->discs;		// No arquivo, cada entrada não nula da grade é acompanhada de um inteiro correpondente à sua posição
 	}
 
 	else if (pss->tipo == Prof) {
 		memst(pss->aulas, 0, sizeof(int)*5*18);		// Limpa a grade ( 0 => vazio)
 		pss->turms = 0;
-		pss->size += sizeof(pss->turms);
 
 		printf("Nº Identificação: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%d", &pss->id);
-		pss->size += sizeof(pss->id);
 
 		printf("Salário: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%f", &pss->slro);
-		pss->size += sizeof(pss->slro);
 
 		printf("Deseja adicionar uma aula [ S ] / [ N ]: ");
 		fgets(input, 16, stdin);
 		sscanf(input, "%c", &chce);
-		chce %= 2;
+		chce %= 2;						// Na tabela ascii, S/s são valores impares e N/n são pares
 
 		while (chce) {
 			printf("Insira a sala: ");
 			fgets(input, 16, stdin);
-			sscanf(input, "%d", &disci);
+			sscanf(input, "%d", &elemento);
 
 			while (1) {
 				do {
@@ -194,8 +179,7 @@ int Preenche(Membro * pss, short int uid) {
 					fgets(input, 16, stdin);
 				} while(sscanf(input, "%d", &dia) < 1);
 
-				if (dia <= 0 || dia > 5) {				// caso o dia escolhido for invalido, a inserção é cancelada
-					//chce = 0;
+				if (dia < 1 || dia > 5) {				// caso o dia escolhido for invalido, a inserção é cancelada
 					break;
 				}
 
@@ -205,8 +189,7 @@ int Preenche(Membro * pss, short int uid) {
 						fgets(input, 16, stdin);
 					} while(sscanf(input, "%d", &hora) < 1);
 
-					if (hora <= 0 || hora > 18) {			// caso o horario escolhido for invalido, a inserção é cancelada
-						//chce = 0;
+					if (hora < 1 || hora > 18) {			// caso o horario escolhido for invalido, a inserção é cancelada
 						break;
 					}
 
@@ -214,9 +197,9 @@ int Preenche(Membro * pss, short int uid) {
 						pss->turms--;
 					}
 
-					pss->aulas[dia-1][hora-1] = disci;
+					pss->aulas[dia-1][hora-1] = elemento;
 
-					if (disci != 0) {						//(*)
+					if (elemento != 0) {						//(*)
 						pss->turms++;
 					}
 				}
@@ -229,22 +212,16 @@ int Preenche(Membro * pss, short int uid) {
 			}
 			chce %= 2;				// Na tabela ascii, S/s são valores impares e N/n são pares
 		}
-		pss->size += sizeof(int)*2*pss->turms;			// No arquivo, cada entrada não nula da grade é acompanhada de um inteiro correpondente à sua posição
 	}
-
-
 	return 1;
 }
 
 void Exibe(Membro * pss) {
-	printf("%d\n", pss->uid);
-	printf("%hhd\n", pss->valid);
-	printf("%d\n", pss->size);
-
+	printf("%hd\n", pss->uid);
+	printf("%hhd\n", pss->valido);
 
 	printf("%d\n", pss->tipo);
 	printf("%s\n", pss->nome);
-	printf("%hhd\n", pss->tamn);
 
 	switch (pss->tipo) {
 	case Alun: 
@@ -279,69 +256,76 @@ void Exibe(Membro * pss) {
 	}
 }
 
-void wAlun(Membro * pss, FILE * f) {		// escreve dados referentes a aluno no arquivo
-	fwrite(&pss->matr, sizeof(long int), 1, f);
-	fwrite(&pss->peri, sizeof(char), 1, f);
+int wAlun(Membro * pss, FILE * f) {		// escreve dados referentes a aluno no arquivo
+	int byt = 0;				// contagem de bytes escritos
 
-	fwrite(&pss->discs, sizeof(char), 1, f);
+	byt += writerb(&pss->matr, sizeof(pss->matr), 1, f);
+	byt += writerb(&pss->peri, sizeof(pss->peri), 1, f);
 
-	for (int i = 0; i < 5*18; i++) {
-		if ( *( ((int *)(pss->grade)) + i ) != 0 ) {
-			fwrite(&i, sizeof(int), 1, f);
-			fwrite( (((int *)(pss->grade)) + i), sizeof(int), 1, f);
-		}
-	}	
+	byt += writerb(&pss->discs, sizeof(pss->discs), 1, f);
+
+	byt += writerb(pss->grade, sizeof(pss->grade), 1, f);
+
+	return byt;
 }
 
-void wProf(Membro * pss, FILE * f) {		// escreve dados referentes a professor no arquivo
-	fwrite(&pss->id, sizeof(int), 1, f);
-	fwrite(&pss->slro, sizeof(float), 1, f);
+int wProf(Membro * pss, FILE * f) {		// escreve dados referentes a professor no arquivo
+	int byt = 0;				// contagem de bytes escritos
 
-	fwrite(&pss->turms, sizeof(char), 1, f);
+	byt += writerb(&pss->id, sizeof(pss->id), 1, f);
+	byt += writerb(&pss->slro, sizeof(pss->slro), 1, f);
 
-	for (int i = 0; i < 5*18; i++) {
-		if ( *( ((int *)(pss->aulas)) + i ) != 0 ) {
-			fwrite(&i, sizeof(int), 1, f);
-			fwrite( (((int *)(pss->aulas)) + i), sizeof(int), 1, f);
-		}
-	}
+	byt += writerb(&pss->turms, sizeof(pss->turms), 1, f);
+
+	byt += writerb(pss->aulas, sizeof(pss->aulas), 1, f);
+
+	return byt;
 }
 
-void Armazena(Membro * pss) {			// escreve os dados no arquivo
-	FILE * f = fopen("dados.2.bin", "a");
+int Armazena(Membro * pss) {			// escreve os dados no arquivo
+	int msiz = sizeof(short int) + (sizeof(char)*68) + sizeof(long int) + (sizeof(int)*5*18);	// quantidade de bytes do pior caso (aluno)
+	int byt = 0;				// contagem de bytes escritos
 
-	fwrite(&pss->uid, sizeof(short int), 1, f);
-	fwrite(&pss->valid, sizeof(char), 1, f);
-	fwrite(&pss->size, sizeof(short int), 1, f);
+	FILE * f = fopen("dados.3.bin", "a");
 
-	fwrite((char *) &pss->tipo, sizeof(char), 1, f);
-	fwrite(&pss->tamn, sizeof(char), 1, f);
-	fwrite(pss->nome, sizeof(char), pss->tamn, f);
+	byt += writerb(&pss->uid, sizeof(pss->uid), 1, f);
+	byt += writerb(&pss->valido, sizeof(pss->valido), 1, f);
+
+	byt += writerb(&pss->tipo, sizeof(char), 1, f);
+
+	byt += writerb(pss->nome, sizeof(pss->nome), 1, f);
 
 	if (pss->tipo == Alun) {
-		wAlun(pss, f);
+		byt += wAlun(pss, f);
 	}
 	else {
-		wProf(pss, f);
+		byt += wProf(pss, f);
+	}
+
+	printf("%d %d\n", msiz, byt);
+
+	if (sizeof(Membro) > byt) {
+		fwrite(pss, sizeof(char), msiz - byt, f);
 	}
 
 	fclose(f);
+
+	return byt;
 }
 
 Membro Le() {			// Lê e retorna um membro do arquivo   //!! inacabada !!
 	Membro pss;
-	FILE * f = fopen("dados.2.bin", "r");
+	FILE * f = fopen("dados.3.bin", "r");
 	while (1) {
 		fread(&pss.uid, sizeof(short int), 1, f);
-		fread(&pss.valid, sizeof(char), 1, f);
-		if (pss.valid < 1) {
+		fread(&pss.valido, sizeof(char), 1, f);
+		if (pss.valido < 1) {
 			break;
 		}
-		fread(&pss.size, sizeof(short int), 1, f);
 
-		fread(&pss.tipo, sizeof(char), 1, f);
-		fread(&pss.tamn, sizeof(char), 1, f);
-		fread(pss.nome, sizeof(char), pss.tamn, f);
+		fread(&pss.tipo, sizeof(int), 1, f);
+
+		fread(pss.nome, sizeof(char), 64, f);
 		if (pss.tipo == Alun) {
 			memst(pss.grade, 0, sizeof(int)*5*18);
 			fread(&pss.matr, sizeof(long int), 1, f);
