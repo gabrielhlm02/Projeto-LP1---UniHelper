@@ -5,6 +5,7 @@
 #define DIAS 5
 #define TURNOS 18
 #define TAM_INPUT 16
+#define TAM_REGISTRO 441
 
 #define ARQUIVO_DADOS "dados.3.bin"
 
@@ -49,8 +50,11 @@ int PreencheAluno(Membro * pss, short int uid);
 int PreencheProfessor(Membro * pss, short int uid);
 
 long BuscarRegistroId();
+
+void RemoverRegistro(long posicao_registro);
 Membro Le(long posicao_registro);
 void Exibe(Membro * pss);
+void ListarTodosRegistros();
 
 int strin(char * in, int size, FILE * f);
 void *memst(void *s, char c, size_t n);
@@ -64,6 +68,8 @@ int Armazena(Membro * pss);
 
 int main(void) {
 	Menu();
+
+	return 0;
 }
 
 void Menu(void) {
@@ -107,12 +113,16 @@ void Menu(void) {
 				cont++;
 				break;
 			//case 2: editar_registro(); break;
-			//case 3: remover_registro(); break;
+			case 3: 
+				RemoverRegistro(BuscarRegistroId());
+				break;
 			case 4: 
 				Le(BuscarRegistroId());
 				break;
 			//case 5: buscar_registro_por_nome(); break;
-			//case 6: listar_todos_os_registros(); break;
+			case 6:
+				ListarTodosRegistros();
+				break;
 			case 7: return (void) 0;
 			default:
 				fprintf(stderr, "Opção inválida\n");
@@ -123,9 +133,7 @@ void Menu(void) {
 
 
 
-// poderia usar (int) (sizeof(in)/sizeof(in[0])) ou fazer um #define para isso
 int strin(char * in, int size, FILE * f) {		// Recebe strings usando fgets e remove caracteres indesejados
-	// fgets para receber do stdin, l.76 ...
 	fgets(in, size, f);
 	int tamn = 0;
 	while (tamn < size && in[tamn] != '\0') {
@@ -501,7 +509,6 @@ Membro Le(long posicao_registro)
 
 	fread(&pss.uid, sizeof(short int), 1, f);
 	fread(&pss.valido, sizeof(char), 1, f);
-	//if (pss.valido < 1) break;
 	fread(&pss.tipo, sizeof(int), 1, f);
 	fread(pss.nome, sizeof(char), 64, f);
 
@@ -533,7 +540,9 @@ Membro Le(long posicao_registro)
 		}
 		*/
 	}
-	Exibe(&pss);
+
+	if (pss.valido == 1)
+		Exibe(&pss);
 
 	fclose(f);
 	return pss;
@@ -541,7 +550,6 @@ Membro Le(long posicao_registro)
 
 long BuscarRegistroId()
 {
-	Membro pss;
 	FILE * file_pointer = fopen(ARQUIVO_DADOS, "rb");
 
 	char input[TAM_INPUT] = {0};
@@ -562,5 +570,34 @@ long BuscarRegistroId()
 		return -1;
 	}
 
+	fclose(file_pointer);
 	return posicao_registro;
+}
+
+void RemoverRegistro(long posicao_registro)
+{
+	FILE * file_pointer = fopen(ARQUIVO_DADOS, "rb+");
+	char zeros[TAM_REGISTRO] = {0};
+
+	fseek(file_pointer, posicao_registro, SEEK_SET);
+	fwrite(zeros, sizeof(char), TAM_REGISTRO, file_pointer);
+
+	fclose(file_pointer);
+}
+
+void ListarTodosRegistros()
+{
+	FILE * file_pointer = fopen(ARQUIVO_DADOS, "rb+");
+
+	fseek(file_pointer, 0L, SEEK_END);
+	long end_file_pos = ftell(file_pointer);
+
+	rewind(file_pointer);
+	long cur_file_pos = ftell(file_pointer);
+
+	for(; cur_file_pos < end_file_pos; cur_file_pos += 441L)
+	{
+		Le(cur_file_pos);
+	}
+
 }
