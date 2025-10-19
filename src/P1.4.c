@@ -7,7 +7,7 @@
 #define TAM_INPUT 16
 #define TAM_REGISTRO 438L
 
-#define ARQUIVO_DADOS "dados.4.bin"
+#define ARQUIVO_DADOS "dados.bin"
 
 typedef struct {					// Tipo = Aluno
 	long int matr;			// Matrícula
@@ -90,7 +90,7 @@ void Menu(void) {
 	int opcao;
 	char input[TAM_INPUT];
 
-	FILE * f = fopen(ARQUIVO_DADOS, "rb");
+	FILE * f = fopen(ARQUIVO_DADOS, "ab+");
 	int cont = UltUID(f) + 1;
 	fclose(f);
 
@@ -1014,6 +1014,10 @@ int EditarRegistro(Membro * pss) {
 }
 
 short UltUID(FILE * f) {
+	fseek(f, 0l, SEEK_END);
+	if(ftell(f) == 0) {
+		return -1;
+	}
 	short uid;
 	fseek(f, -(TAM_REGISTRO), SEEK_END);
 	printf("%lu", ftell(f));
