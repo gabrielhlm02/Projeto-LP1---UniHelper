@@ -51,7 +51,7 @@ void ListarTodosRegistros();
 
 void ListaCompacto();
 int LeUIDeNome(FILE * f, short *uid, char *valido, char nome[TAM_NOME]);
-short BuscaPorNome();
+long BuscaPorNome(char busca[], long pos_ini);
 int prefixo(char *str1, char *str2);
 
 int strin(char * in, int size, FILE * f);
