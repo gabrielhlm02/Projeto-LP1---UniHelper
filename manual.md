@@ -44,35 +44,31 @@ Para usá-lo, basta digitar o número correspondente a opção desejada e confir
 
 ## Opções:
 
-<!--### 1 - Criar Registro-->
-[<h3>1 - Criar Registro </h3>](#criar-registro)
-
-Se for sua primeira vez usando Uni Helper, provavelmente é aqui que quer começar.
-
+### 1 - Criar Registro
+[Detalhamento](#criar-registro)\
+Se for sua primeira vez usando Uni Helper, provavelmente é aqui que quer começar.\
 Aqui, você irá inserir os dados que serão gravados no banco de dados.
 
-<!--### 2 - Editar Registro-->
-[<h3>2 - Editar Registro </h3>](#editar-registro)
-Digitou um dado errado, ou a situação de uma pessoa mudou? 
-
+### 2 - Editar Registro
+[Detalhamento](#editar-registro)\
+Digitou um dado errado, ou a situação de uma pessoa mudou? \
 Esta opção irá permitir que você atualize os dados cadastrados de algum membro.
 
-<!--### 3 - Remover Registro-->
-[<h3>3 - Remover Registro</h3>](#remover-registro)
+### 3 - Remover Registro
+[Detalhamento](#remover-registro)\
 Se a edição de um dado não for suficiente, você também pode removê-lo do banco de dados.
 
-<!--### 4 - Busca por ID-->
-[<h3>4 - Busca por ID</h3>](#busca-por-id)
+### 4 - Busca por ID
+[Detalhamento](#busca-por-id)\
 Esta opção permite que você consulte os dados cadastrados a partir do ID único gerado pelo programa.
 
-<!--### 5 - Busca por Nome-->
-[<h3>5 - Busca por Nome</h3>](#busca-por-nome)
+### 5 - Busca por Nome
+[Detalhamento](#busca-por-nome)\
 Caso não saiba o ID único de um membro, você também pode realizar uma busca a partir do nome da pessoa.
 
-<!--### 6 - Listar Todos os Registros-->
-[<h3>6 - Listar Todos os Registros</h3>](#listar-todos-os-registro)
-Caso deseje consultar todos os registros cadastrados até então.
-
+### 6 - Listar Todos os Registros
+[Detalhamento](#listar-todos-os-registro)\
+Caso deseje consultar todos os registros cadastrados até então.\
 Também pode ser útil se você não souber o ID nem o nome de um membro!
 
 ### 7 - Sair
@@ -208,7 +204,7 @@ Permite que você altere o período vinculado a um discente.
 ### 4 - Aulas / Grade
 Permite que você insera ou remova elementos da grade.
 
-[O processo de edição é o mesmo que o preenchimento!](#preencher-grades)
+[O processo de edição é o mesmo que o de preenchimento!](#preencher-grades)
 
 A única diferença é que, ao remover, você não irá informar o número de um elemento, apenas a posição.
 
