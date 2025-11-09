@@ -12,14 +12,14 @@
 ╚═══════════════════════════════════════════════════════════════════════════╝
 ```
 
-# 📖 MANUAL
+# MANUAL
 
-Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e docentes em uma universidade
+Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e docentes de uma universidade.
 
 <!--## Lista de Conteúdos-->
 
 
-## 🔍 Navegação
+## Navegação
 <!-- ![Menu](Menu.png) -->
 
 ```
@@ -42,7 +42,7 @@ Ao iniciar Uni Helper, você será apresentado a esse menu.
 
 Para usá-lo, basta digitar o número correspondente a opção desejada e confirmar com a tecla `enter`.
 
-## 🤔 Opções:
+## Opções:
 
 <!--### 1 - Criar Registro-->
 [<h3>1 - Criar Registro </h3>](#criar-registro)
@@ -78,8 +78,9 @@ Também pode ser útil se você não souber o ID nem o nome de um membro!
 ### 7 - Sair
 Finaliza o programa.
 
+<br>
 
-## 📝 Criar Registro
+## Criar Registro
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [1]: criar registro                                                 ║
@@ -93,12 +94,13 @@ Finaliza o programa.
 Ao escolher criar um registro, serão apresentadas três informações:
 
 * Uma listagem de todos os registro cadastrados no momento
-* O ID Único ( UID ) deste registro novo
+* O ID Único ( UID ) do novo registro
 * O campo a ser preenchido
 
-O primeiro dado a ser preenchido é o nome. _( É este que será considerado na busca por nome! )_
+O primeiro dado a ser preenchido é o nome. _( É este que será considerado na [busca por nome!](#busca-por-nome) )_
 
-Depois, você precisá definir o tipo do membro que será cadastrado, Professor, ou Aluno, cada um exige dados diferentes. _( Atenção! Uma vez escolhido, o cargo não pode ser editado sem a remoção completa do membro )_
+Depois, você deverá definir o tipo do membro que será cadastrado, Professor, ou Aluno, cada um exige dados diferentes. _( Atenção! Uma vez escolhido, o cargo não pode ser editado sem a remoção completa do membro )_
+
 
 ### Dados por Cargo
 [Professor:](#professor)
@@ -146,7 +148,9 @@ _( Dica! Caso tenha inserido um elemento errado, você pode removê-lo substitui
 
 Uma vez preenchido, você poderá rever todos os dados do membro adicionado.
 
-## ♻ Editar Registro
+<br>
+
+## Editar Registro
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -156,6 +160,9 @@ Uma vez preenchido, você poderá rever todos os dados do membro adicionado.
  Lista de registros:
  [ 0 ] Professor 1
  [ 1 ] Aluno 1
+   .
+   .
+   .
 
  Selecione o id único (UID):
 ```
@@ -205,8 +212,9 @@ Permite que você insera ou remova elementos da grade.
 
 A única diferença é que, ao remover, você não irá informar o número de um elemento, apenas a posição.
 
+<br>
 
-## 👻 Remover Registro
+## Remover Registro
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -224,7 +232,9 @@ Para as próximas operações, o registro aparecerá como `**Removido**`.
 
 _( Atenção! Registros removidos podem ser preenchidos novamente através do [menu de edição](#editar-registro). Todos os dados deverão ser preenchidos novamente.)_
 
-## 🔢 Busca por ID
+<br>
+
+## Busca por ID
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -235,7 +245,9 @@ _( Atenção! Registros removidos podem ser preenchidos novamente através do [m
 ```
 Ao inserir um ID Único, os dados do membro correspondente serão exibidos.
 
-## 🔠 Busca por Nome
+<br>
+
+## Busca por Nome
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -246,7 +258,9 @@ Ao inserir um ID Único, os dados do membro correspondente serão exibidos.
 ```
 Ao digitar um nome, todos os registros com um nome correspodente serão exibidos.
 
-## 📜 Listar Todos os Registros
+<br>
+
+## Listar Todos os Registros
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
