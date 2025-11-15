@@ -21,7 +21,7 @@ Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e 
 # Lista de Conteúdos
 
 ### [1 - Navegação](#navegação)
-### [2 - Opções](#opções)
+### [2 - Opções](#opções-)
 ### [3 - Visualização](#visualização)
 
 </br>
