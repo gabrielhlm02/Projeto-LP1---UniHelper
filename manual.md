@@ -20,14 +20,16 @@ Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e 
 
 # Lista de Conteúdos
 
-### [1 - Navegação](#navegação-↑)
-### [2 - Opções](#opções--↑)
-### [3 - Visualização](#visualização-↑)
+### [1 - Navegação](#navegação)
+### [2 - Opções](#opções)
+### [3 - Visualização](#visualização)
 
 </br>
 </br>
 
-## Navegação [↑](#1---navegação)
+## Navegação
+[↑](#1---navegação)
+
 ![Menu](assets/menu.png)
 
 <!--```
@@ -52,31 +54,32 @@ Para usá-lo, basta digitar o número correspondente a opção desejada e confir
 
 </br>
 
-## Opções : [↑](#2---opções)
+## Opções :
+[↑](#2---opções)
 
-### [1 - Criar Registro](#criar-registro-↑)
+### [1 - Criar Registro](#criar-registro)
 
 Se for sua primeira vez usando Uni Helper, provavelmente é aqui que quer começar.\
 Aqui, você irá inserir os dados que serão gravados no banco de dados.
 
-### [2 - Editar Registro](#editar-registro-↑)
+### [2 - Editar Registro](#editar-registro)
 
 Digitou um dado errado, ou a situação de uma pessoa mudou? \
 Esta opção irá permitir que você atualize os dados cadastrados de algum membro.
 
-### [3 - Remover Registro](#remover-registro-↑)
+### [3 - Remover Registro](#remover-registro)
 
 Se a edição de um dado não for suficiente, você também pode removê-lo do banco de dados.
 
-### [4 - Busca por ID](#busca-por-id-↑)
+### [4 - Busca por ID](#busca-por-id)
 
 Esta opção permite que você consulte os dados cadastrados a partir do ID único gerado pelo programa.
 
-### [5 - Busca por Nome](#busca-por-nome-↑)
+### [5 - Busca por Nome](#busca-por-nome)
 
 Caso não saiba o ID único de um membro, você também pode realizar uma busca a partir do nome da pessoa.
 
-### [6 - Listar Todos os Registros](#listar-todos-os-registros-↑)
+### [6 - Listar Todos os Registros](#listar-todos-os-registros)
 
 Caso deseje consultar todos os registros cadastrados até então.\
 Também pode ser útil se você não souber o ID nem o nome de um membro!
@@ -88,7 +91,9 @@ Finaliza o programa.
 
 
 
-## Criar Registro [↑](#1---criar-registro)
+## Criar Registro
+[↑](#1---criar-registro)
+
 ![op1](assets/op1.png)
 
 <!--```
@@ -154,13 +159,16 @@ O mesmo pode ser feito durante a seleção de dias da semana, neste caso, ao vol
 
 _( Dica! Caso tenha inserido um elemento errado, você pode removê-lo substituindo o elemento indesejado por `0`.)_
 
-### Visualização Imediata [↓](#visualização-↑)
+### Visualização Imediata
+[↓](#visualização)
 
 Uma vez preenchido, você poderá rever todos os dados do membro adicionado.
 
 <br>
 
-## Editar Registro [↑](#2---editar-registro)
+## Editar Registro
+[↑](#2---editar-registro)
+
 ![op2.1](assets/op2.1.png)
 
 <!-- ```
@@ -226,7 +234,9 @@ A única diferença é que, ao remover, você não irá informar o número de um
 
 <br>
 
-## Remover Registro [↑](#3---remover-registro)
+## Remover Registro
+[↑](#3---remover-registro)
+
 ![op3](assets/op3.png)
 <!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -246,7 +256,9 @@ _( Atenção! Registros removidos podem ser preenchidos novamente através do [m
 
 <br>
 
-## Busca por ID [↑](#4---busca-por-id)
+## Busca por ID
+[↑](#4---busca-por-id)
+
 ![op4](assets/op4.png)
 <!-- ``` 
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -259,7 +271,9 @@ Ao inserir um ID Único, os dados do membro correspondente serão exibidos.
 
 <br>
 
-## Busca por Nome [↑](#5---busca-por-nome)
+## Busca por Nome
+[↑](#5---busca-por-nome)
+
 ![op5](assets/op5.png)
 <!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -272,7 +286,9 @@ Ao digitar um nome, todos os registros com um nome correspodente serão exibidos
 
 <br>
 
-## Listar Todos os Registros [↑](#6---listar-todos-os-registros)
+## Listar Todos os Registros
+[↑](#6---listar-todos-os-registros)
+
 ![op6](assets/op6.png)
 <!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -285,7 +301,9 @@ Ao escolher esta opção, todos os registros armazenados são exibidos.
 </br>
 
 
-## Visualização [↑](#3---visualização)
+## Visualização
+[↑](#3---visualização)
+
 Seja ao criar, editar ou listar um registro, Uni Helper apresentará uma representação visual dos dados listados.
 Para professores, os dados serão apresentados como:
 
