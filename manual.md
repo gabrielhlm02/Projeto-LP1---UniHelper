@@ -1,6 +1,6 @@
-<!-- ![Uni Helper](Unilogo.png) -->
+![Uni Helper](assets/logo.png)
 
-```
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                                                                           ║
 ║ ██    ██ ███    ██ ██     ██   ██ ███████ ██      ██████  ███████ ██████  ║
@@ -10,19 +10,27 @@
 ║  ██████  ██   ████ ██     ██   ██ ███████ ███████ ██      ███████ ██   ██ ║
 ║                                                                           ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
-```
+``` -->
 
 # MANUAL
 
 Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e docentes de uma universidade.
 
-<!--## Lista de Conteúdos-->
+</br>
 
+# Lista de Conteúdos
 
-## Navegação
-<!-- ![Menu](Menu.png) -->
+### [1 - Navegação](#navegação-↑)
+### [2 - Opções](#opções--↑)
+### [3 - Visualização](#visualização-↑)
 
-```
+</br>
+</br>
+
+## Navegação [↑](#1---navegação)
+![Menu](assets/menu.png)
+
+<!--```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                                                                           ║
 ║ [1] Criar registro                                                        ║
@@ -36,38 +44,40 @@ Uni Helper é um programa pensado para facilitar o gerenciamento de discentes e 
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
  Escolha uma opção:
- ```
+ ```-->
 
 Ao iniciar Uni Helper, você será apresentado a esse menu.
 
 Para usá-lo, basta digitar o número correspondente a opção desejada e confirmar com a tecla `enter`.
 
-## Opções:
+</br>
 
-### 1 - Criar Registro
-[Detalhamento](#criar-registro)\
+## Opções : [↑](#2---opções)
+
+### [1 - Criar Registro](#criar-registro-↑)
+
 Se for sua primeira vez usando Uni Helper, provavelmente é aqui que quer começar.\
 Aqui, você irá inserir os dados que serão gravados no banco de dados.
 
-### 2 - Editar Registro
-[Detalhamento](#editar-registro)\
+### [2 - Editar Registro](#editar-registro-↑)
+
 Digitou um dado errado, ou a situação de uma pessoa mudou? \
 Esta opção irá permitir que você atualize os dados cadastrados de algum membro.
 
-### 3 - Remover Registro
-[Detalhamento](#remover-registro)\
+### [3 - Remover Registro](#remover-registro-↑)
+
 Se a edição de um dado não for suficiente, você também pode removê-lo do banco de dados.
 
-### 4 - Busca por ID
-[Detalhamento](#busca-por-id)\
+### [4 - Busca por ID](#busca-por-id-↑)
+
 Esta opção permite que você consulte os dados cadastrados a partir do ID único gerado pelo programa.
 
-### 5 - Busca por Nome
-[Detalhamento](#busca-por-nome)\
+### [5 - Busca por Nome](#busca-por-nome-↑)
+
 Caso não saiba o ID único de um membro, você também pode realizar uma busca a partir do nome da pessoa.
 
-### 6 - Listar Todos os Registros
-[Detalhamento](#listar-todos-os-registro)\
+### [6 - Listar Todos os Registros](#listar-todos-os-registros-↑)
+
 Caso deseje consultar todos os registros cadastrados até então.\
 Também pode ser útil se você não souber o ID nem o nome de um membro!
 
@@ -76,8 +86,12 @@ Finaliza o programa.
 
 <br>
 
-## Criar Registro
-```
+
+
+## Criar Registro [↑](#1---criar-registro)
+![op1](assets/op1.png)
+
+<!--```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [1]: criar registro                                                 ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
@@ -86,7 +100,7 @@ Finaliza o programa.
 
  UID do próximo registro: 0
  Nome:
-```
+```-->
 Ao escolher criar um registro, serão apresentadas três informações:
 
 * Uma listagem de todos os registro cadastrados no momento
@@ -140,15 +154,16 @@ O mesmo pode ser feito durante a seleção de dias da semana, neste caso, ao vol
 
 _( Dica! Caso tenha inserido um elemento errado, você pode removê-lo substituindo o elemento indesejado por `0`.)_
 
-### Visualização
+### Visualização Imediata [↓](#visualização-↑)
 
 Uma vez preenchido, você poderá rever todos os dados do membro adicionado.
 
 <br>
 
-## Editar Registro
+## Editar Registro [↑](#2---editar-registro)
+![op2.1](assets/op2.1.png)
 
-```
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [2]: editar registro                                                ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
@@ -161,13 +176,14 @@ Uma vez preenchido, você poderá rever todos os dados do membro adicionado.
    .
 
  Selecione o id único (UID):
-```
+``` -->
 
 Ao escolher editar um registro você será apresentado a uma lista com todos os registros criados até então ao lado de seus IDs e um campo para inserir o ID Único do registro.
 
 Após escolher um registro, você poderá ver os dados atuais deste membro e o seguinte menu:
 
-```
+![op2.2](assets/op2.2.png)
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Campo de edição de registro                                               ║
 ╠═══════════════════════════════════════════════════════════════════════════╣
@@ -181,7 +197,7 @@ Após escolher um registro, você poderá ver os dados atuais deste membro e o s
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
  Qual dado deseja editar:
-```
+``` -->
 
 _( Atenção! Opções 2, 3 e 4 variam de acordo com o cargo do membro registrado. )_
 
@@ -210,15 +226,15 @@ A única diferença é que, ao remover, você não irá informar o número de um
 
 <br>
 
-## Remover Registro
-
-```
+## Remover Registro [↑](#3---remover-registro)
+![op3](assets/op3.png)
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [3]: remover registro                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
  Selecione o id único (UID):
-```
+``` -->
 
 Aqui você consegue remover um registro do banco de dados.
 
@@ -230,38 +246,74 @@ _( Atenção! Registros removidos podem ser preenchidos novamente através do [m
 
 <br>
 
-## Busca por ID
-
-```
+## Busca por ID [↑](#4---busca-por-id)
+![op4](assets/op4.png)
+<!-- ``` 
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [4]: buscar registro por ID                                         ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
  Selecione o id único (UID):
-```
+``` -->
 Ao inserir um ID Único, os dados do membro correspondente serão exibidos.
 
 <br>
 
-## Busca por Nome
-
-```
+## Busca por Nome [↑](#5---busca-por-nome)
+![op5](assets/op5.png)
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [5]: buscar registro por nome                                       ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
  Qual nome deseja buscar:
-```
+``` -->
 Ao digitar um nome, todos os registros com um nome correspodente serão exibidos.
 
 <br>
 
-## Listar Todos os Registros
-
-```
+## Listar Todos os Registros [↑](#6---listar-todos-os-registros)
+![op6](assets/op6.png)
+<!-- ```
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║ Opção [6]: listar todos os registros                                      ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 *dados*
-```
+``` -->
 Ao escolher esta opção, todos os registros armazenados são exibidos.
+
+</br>
+
+
+## Visualização [↑](#3---visualização)
+Seja ao criar, editar ou listar um registro, Uni Helper apresentará uma representação visual dos dados listados.
+Para professores, os dados serão apresentados como:
+
+![datprof](assets/datprof.png)
+
+Para alunos:
+
+![datalun](assets/datalun.png)
+
+O primeiro dado (comum a ambos os tipos) é o ID Único, definido automaticamente pelo programa;\
+O segundo deverá sempre aparecer como 1! Significa que o registro não foi removido ainda;\
+O terceiro é o tipo do registro e deverá ser igual ao escolhido durante a criação;\
+*(Estes três dados inciais são imutáveis e serão sempre os mesmos enquanto o registro não for removido!)*
+
+O quarto é o nome, este corresponderá a atualização mais recente feita ao nome do registro;\
+*(É este o nome que você deverá buscar quando usar a [Busca por Nome](#busca-por-nome-↑))*
+
+Os próximos dados podem variar de acordo com o tipo de registro sendo visualizado;\
+O quinto dado é o número de identificação do docente ou a matrícula do discente;\
+O sexto é o salário do docente ou o período em que se encontra o discente;\
+O sétimo é a quantidade de horários ocupados na grade de aulas do docente ou discente;
+
+Por fim, é apresentada a grade;
+É importante entender a sua estrutura!
+
+Pode-se imaginar a grade como uma matriz, cada uma das 5 linhas corresponde a um dia da semana (de segunda a sexta), enquanto as 18 colunas correspondem aos turnos daquele dia;
+Da 1ª coluna até a 6ª devem estar cadastrados as aulas/disciplinas referentes ao turno da manhã;\
+Da 7ª até a 12ª as aulas/disciplinas referentes ao turno da tarde;\
+E da 13ª até 18ª as aulas/disciplinas referentes ao turno da noite!
+
+E, com isso, você será capaz de entender os dados apresentados durante a visualização de um registro!
