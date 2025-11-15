@@ -319,7 +319,7 @@ O terceiro é o tipo do registro e deverá ser igual ao escolhido durante a cria
 *(Estes três dados inciais são imutáveis e serão sempre os mesmos enquanto o registro não for removido!)*
 
 O quarto é o nome, este corresponderá a atualização mais recente feita ao nome do registro;\
-*(É este o nome que você deverá buscar quando usar a [Busca por Nome](#busca-por-nome-↑))*
+*(É este o nome que você deverá buscar quando usar a [Busca por Nome](#busca-por-nome))*
 
 Os próximos dados podem variar de acordo com o tipo de registro sendo visualizado;\
 O quinto dado é o número de identificação do docente ou a matrícula do discente;\
