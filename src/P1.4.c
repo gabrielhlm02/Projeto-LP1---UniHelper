@@ -81,16 +81,22 @@ void Menu(void) {
 				"╔═══════════════════════════════════════════════════════════════════════════╗\n"
 				"║ Opção [5]: buscar registro por nome                                       ║\n"
 				"╚═══════════════════════════════════════════════════════════════════════════╝\n");
-				pessoa1 = Le(BuscaPorNome());
+				char busca[TAM_NOME];
+				printf("\n Qual nome deseja buscar: ");
+				strin(busca, TAM_NOME, stdin);
 
-				if (pessoa1.valido == 1)
-					Exibe(&pessoa1);
-				else
-				{
-					printf("\n"
-					"╔═══════════════════════════════════════════════════════════════════════════╗\n"
-					"  O registro de id %d foi removido                                           \n"
-					"╚═══════════════════════════════════════════════════════════════════════════╝\n", pessoa1.uid);
+				for(long pos = BuscaPorNome(busca, 0); pos != -1; pos = BuscaPorNome(busca, pos+TAM_REGISTRO)) {
+					pessoa1 = Le(pos);
+
+					if (pessoa1.valido == 1)
+						Exibe(&pessoa1);
+					else
+					{
+						printf("\n"
+						"╔═══════════════════════════════════════════════════════════════════════════╗\n"
+						"  O registro de id %d foi removido                                           \n"
+						"╚═══════════════════════════════════════════════════════════════════════════╝\n", pessoa1.uid);
+					}
 				}
 				break;
 
@@ -706,7 +712,6 @@ int GradEdit(int tipo, int grade[DIAS][TURNOS], char * count) {
 	while (1) {
 		printf("\n"
 		"╔═══════════════════════════════════════════════════════════════════════════╗\n\n");
-		printf(" [ 1 ] Nome\n");
 		printf(" [ 1 ] Inserir\n");
 		printf(" [ 2 ] Remover\n");
 		printf(" [ 3 ] Voltar\n");
@@ -901,16 +906,16 @@ void ListarTodosRegistros()
 }
 
 
-short BuscaPorNome() {
-	char busca[TAM_NOME];
-	printf("\n Qual nome deseja buscar: ");
-	strin(busca, TAM_NOME, stdin);
+long BuscaPorNome(char busca[], long pos_ini) {
 
 	char nome[64] = {0};
-	long cur_pos = 0;
+	long cur_pos = pos_ini;
 	FILE * f = fopen(ARQUIVO_DADOS, "rb");
 	fseek(f, 0l, SEEK_END);
 	long end_pos = ftell(f);
+	if (pos_ini >= end_pos) {
+		return -1;
+	}
 	rewind(f);
 
 	while (cur_pos < end_pos) {
@@ -926,7 +931,9 @@ short BuscaPorNome() {
 		cur_pos += TAM_REGISTRO;
 	}
 
-	printf("Nome não encontrado!\n");
+	if (pos_ini == 0){
+		printf(" Nome não encontrado!\n");
+	}
 	return -1;
 }
 
