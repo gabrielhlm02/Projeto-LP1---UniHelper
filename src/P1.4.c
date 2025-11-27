@@ -248,6 +248,8 @@ int PreencheAluno(Membro * pss, short int uid)
 				}
 
 				while (1) {
+					int removido;
+
 					do {
 						printf(" Insira um horário [ 1 <-> 18 ]: ");
 						strin(input, TAM_INPUT, stdin);
@@ -256,15 +258,19 @@ int PreencheAluno(Membro * pss, short int uid)
 					if (hora < 1 || hora > TURNOS) {
 						break;
 					}
-					
-					if (pss->dados.aluno.grade[dia-1][hora-1] != 0) {
-						pss->dados.aluno.discs--;		
-					}
-					pss->dados.aluno.grade[dia-1][hora-1] = elemento;
 
-					if (elemento != 0) {	
+					if (elemento != 0 && !BuscaGrade(pss->dados.aluno.grade, elemento)) {	
 						pss->dados.aluno.discs++;
 					}
+
+					removido = pss->dados.aluno.grade[dia-1][hora-1];
+
+					pss->dados.aluno.grade[dia-1][hora-1] = elemento;
+
+					if (removido != 0 && !BuscaGrade(pss->dados.aluno.grade, removido)) {
+						pss->dados.aluno.discs--;		
+					}
+					
 				}
 			}
 		}
@@ -312,6 +318,8 @@ int PreencheProfessor(Membro * pss, short int uid)
 			}
 
 			while (1) {
+				int removido;
+
 				do {
 					printf(" Insira um horário [ 1 <-> 18 ]: ");
 					strin(input, TAM_INPUT, stdin);
@@ -321,14 +329,16 @@ int PreencheProfessor(Membro * pss, short int uid)
 					break;
 				}
 
-				if (pss->dados.professor.aulas[dia-1][hora-1] != 0) {		// (*)
-					pss->dados.professor.turms--;
+				if (elemento != 0 && !BuscaGrade(pss->dados.professor.aulas, elemento)) {	
+					pss->dados.professor.turms++;
 				}
+
+				removido = pss->dados.professor.aulas[dia-1][hora-1];
 
 				pss->dados.professor.aulas[dia-1][hora-1] = elemento;
 
-				if (elemento != 0) {						//(*)
-					pss->dados.professor.turms++;
+				if (removido != 0 && !BuscaGrade(pss->dados.professor.aulas, removido)) {
+					pss->dados.professor.turms--;		
 				}
 			}
 		}
@@ -743,6 +753,8 @@ int GradEdit(int tipo, int grade[DIAS][TURNOS], char * count) {
 			}
 
 			while (1) {
+				int removido = 0;
+				
 				do {
 					printf(" Insira um dia da semana [ 1 <-> 5 ]: ");
 					strin(input, TAM_INPUT, stdin);
@@ -762,16 +774,17 @@ int GradEdit(int tipo, int grade[DIAS][TURNOS], char * count) {
 						break;
 					}
 
-					if (grade[dia-1][hora-1] != 0) {		// (*)
-						(*count)--;
+					if (elemento != 0 && !BuscaGrade(grade, elemento)) {		// (*)
+						(*count)++;						
 						//printf("%hhd", *count);
 					}
 
+					removido = grade[dia-1][hora-1];
+
 					grade[dia-1][hora-1] = elemento;
 
-					if (elemento != 0) {						//(*)
-						(*count)++;
-						//printf("%hhd", *count);
+					if (removido != 0 && !BuscaGrade(grade, removido)){
+						(*count)--;
 					}
 				}
 			}
@@ -958,4 +971,15 @@ short UltUID(FILE * f) {
 	//printf("pos: %lu\n", ftell(f));
 	fread(&uid, sizeof(uid), 1, f);
 	return uid;
+}
+
+int BuscaGrade(int grade[DIAS][TURNOS], int elem) {
+	for (int i = 0; i < DIAS; i++) {
+		for (int j = 0; j < TURNOS; j++) {
+			if (grade[i][j] == elem) {
+				return 1;
+			}
+		}
+	}
+	return 0;
 }
