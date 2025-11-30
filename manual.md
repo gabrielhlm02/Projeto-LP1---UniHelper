@@ -226,7 +226,7 @@ Permite que você altere o salário vinculado a um docente.
 Permite que você altere o período vinculado a um discente.
 
 ### 4 - Aulas / Grade
-Permite que você insera ou remova elementos da grade.
+Permite que você insira ou remova elementos da grade.
 
 [O processo de edição é o mesmo que o de preenchimento!](#preencher-grades)
 
